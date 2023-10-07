@@ -1,12 +1,12 @@
+import { Canvas } from "./Canvas";
+import { Keys } from "./Controller";
+import * as Map1 from "./Maps/Map1";
 import { Player } from "./Player";
 
-let canvas: HTMLCanvasElement;
-let context: CanvasRenderingContext2D;
+export const canvas: HTMLCanvasElement = Canvas.getCanvas();
+export const context: CanvasRenderingContext2D = Canvas.getContext();
 
 let keys = [];
-
-const CANVAS_WIDTH = 1000;
-const CANVAS_HEIGHT = 400;
 
 enum Events {
     KEY_DOWN = "keydown",
@@ -23,23 +23,21 @@ document.body.addEventListener(Events.KEY_UP, function (e) {
 });
 
 window.addEventListener(Events.FIRST_LOAD, function () {
-    setupCanvas();
-    setCanvasSize();
-
+    Canvas.setSize();
     doStuff();
 });
 
 function doStuff() {
-    const player = new Player(context);
-    player.drawCharacter();
-}
+    if (keys[Keys.ARROW_RIGHT]) {
+        Player.getInstance().moveRight();
+    }
 
-function setupCanvas() {
-    canvas = document.getElementById("canvas-new") as HTMLCanvasElement;
-    context = canvas.getContext("2d");
-}
+    if (keys[Keys.ARROW_LEFT]) {
+        Player.getInstance().moveLeft();
+    }
 
-function setCanvasSize() {
-    canvas.width = CANVAS_WIDTH;
-    canvas.height = CANVAS_HEIGHT;
+    Map1.drawScenario();
+    Player.getInstance().drawPlayer();
+
+    requestAnimationFrame(doStuff);
 }
