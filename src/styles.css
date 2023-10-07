@@ -1,6 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 
-#reference{
-    margin-left:2%;
+#canvas-new {
+    background: linear-gradient(#f5c5a8, #eee79b); 
+}
+
+#reference {
     background: linear-gradient(#80BCA3, #B6D8C0); 
 }
