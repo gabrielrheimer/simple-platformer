@@ -21,6 +21,10 @@ export class Scenario {
     public addSurface(surface: ISurface): void {
         this.surfaces.push(surface);
     }
+    
+    public addSurfaces(surfaces: ISurface[]): void {
+        surfaces.forEach(surface => this.addSurface(surface));
+    }
 
     public drawScenario(): void {
         this.surfaces.forEach(surface => {
