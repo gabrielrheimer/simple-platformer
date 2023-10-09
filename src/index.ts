@@ -2,6 +2,7 @@ import { Canvas } from "./Canvas";
 import { Keys } from "./Controller";
 import * as Map1 from "./Maps/Map1";
 import { Player } from "./Player";
+import { Scenario } from "./Scenario";
 
 export const canvas: HTMLCanvasElement = Canvas.getCanvas();
 export const context: CanvasRenderingContext2D = Canvas.getContext();
@@ -36,6 +37,7 @@ function doStuff() {
         Player.getInstance().moveLeft();
     }
 
+    Scenario.clear();
     Map1.drawScenario();
     Player.getInstance().drawPlayer();
 
