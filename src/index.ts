@@ -38,8 +38,8 @@ function doStuff() {
     }
 
     Scenario.clear();
-    Map1.drawScenario();
     Player.getInstance().drawPlayer();
+    Map1.drawScenario();
 
     requestAnimationFrame(doStuff);
 }

@@ -1,19 +1,21 @@
 import { context } from ".";
 import { Canvas } from "./Canvas";
 import { Colors } from "./Colors";
+import { Controller } from "./Controller";
+import { Player } from "./Player";
 
 export interface ISize {
     width: number,
     height: number
 }
 
-export interface IThing extends ISize{
+export interface IElement extends ISize{
     posX: number,
     posY: number,
     color: Colors
 }
 
-export interface ISurface extends IThing {}
+export interface ISurface extends IElement {}
 
 export class Scenario {
     private surfaces: ISurface[] = [];
@@ -30,6 +32,12 @@ export class Scenario {
         this.surfaces.forEach(surface => {
             context.fillStyle = surface.color;
             context.fillRect(surface.posX, surface.posY, surface.width, surface.height);
+        
+            const player = Player.getInstance();
+            const collisionDetected = Controller.collisionDetector(player.getElement(), surface);
+            if (collisionDetected) {
+                player.resolveCollision();
+            }
         });
     }
 
