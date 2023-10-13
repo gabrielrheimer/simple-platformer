@@ -1,8 +1,8 @@
 import { canvas } from ".";
 
 export class Canvas {
-    public static WIDTH = 1000;
     public static HEIGHT = 400; 
+    public static WIDTH = 1000;
     
     public static getCanvas() {
         return document.getElementById("canvas-new") as HTMLCanvasElement;
