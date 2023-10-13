@@ -1,14 +1,21 @@
 import { context } from ".";
 import { Canvas } from "./Canvas";
 import { Controller } from "./Controller";
-import { IElement } from "./elements/Element";
+import { Element, IElement } from "./elements/Element";
 import { Player } from "./elements/Player";
 
 export class Scenario {
-    private surfaces: IElement[] = [];
+    private surfaces: Element[] = [];
 
     public addSurface(surface: IElement): void {
-        this.surfaces.push(surface);
+        const surfaceElement = new Element(
+            surface.height,
+            surface.width,
+            surface.posX,
+            surface.posY,
+            surface.color
+        );
+        this.surfaces.push(surfaceElement);
     }
     
     public addSurfaces(surfaces: IElement[]): void {
@@ -18,9 +25,7 @@ export class Scenario {
     public drawScenario(): void {
         this.surfaces.forEach(surface => {
             // TBD - find out how to reuse the draw implementation from Element
-            context.fillStyle = surface.color;
-            context.fillRect(surface.posX, surface.posY, surface.width, surface.height);
-        
+            surface.drawElement();
             const player = Player.getInstance();
             const collisionDetected = Controller.collisionDetector(player.getElement(), surface);
             if (collisionDetected) {
@@ -33,5 +38,3 @@ export class Scenario {
         context.clearRect(0, 0, Canvas.WIDTH, Canvas.HEIGHT);
     }
 }
-
-export { IElement };
