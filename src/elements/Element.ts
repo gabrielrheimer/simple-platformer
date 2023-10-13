@@ -13,11 +13,8 @@ export interface IElement extends ISize {
 }
 
 export class Element {
-    public height: number;
-    public width: number;
-    public posX: number;
-    public posY: number;
-    public color: Colors;
+    constructor(public height: number, public width: number, public posX: number, public posY: number, public color: Colors) {
+    }
 
     public getElement(): IElement {
         return {

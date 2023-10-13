@@ -1,3 +1,4 @@
+import { Colors } from "../Color";
 import { Element, IElement } from "./Element";
 
 export interface IMovableElement extends IElement {
@@ -9,11 +10,20 @@ export interface IMovableElement extends IElement {
 }
 
 export class MovableElement extends Element {
-    public maximumSpeed
-    public speedY;
-    public speedX;
-    public accelerationX;
-    public accelerationY;
+    constructor(
+        height: number,
+        width: number,
+        posX: number,
+        posY: number,
+        color: Colors,
+        public maximumSpeed: number,
+        public speedY: number,
+        public speedX: number,
+        public accelerationX: number,
+        public accelerationY: number
+    ) {
+        super(height, width, posX, posY, color);
+    }
 
     public getElement(): IMovableElement {
         return {
