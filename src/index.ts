@@ -1,7 +1,6 @@
 import { Canvas } from "./Canvas";
-import { Keys } from "./Controller";
-import * as Map1 from "./Maps/Map1";
-import { Player } from "./Player";
+import * as Map1 from "./maps/Map1";
+import { Player } from "./elements/Player";
 import { Scenario } from "./Scenario";
 
 export const canvas: HTMLCanvasElement = Canvas.getCanvas();
@@ -13,6 +12,13 @@ enum Events {
     KEY_DOWN = "keydown",
     KEY_UP = "keyup",
     FIRST_LOAD = "load"
+}
+
+export enum Keys {
+    ARROW_UP = "ArrowUp",
+    ARROW_DOWN = "ArrowDown",
+    ARROW_LEFT = "ArrowLeft",
+    ARROW_RIGHT = "ArrowRight"
 }
 
 document.body.addEventListener(Events.KEY_DOWN, function (e) {
@@ -38,7 +44,7 @@ function doStuff() {
     }
 
     Scenario.clear();
-    Player.getInstance().drawPlayer();
+    Player.getInstance().drawElement();
     Map1.drawScenario();
 
     requestAnimationFrame(doStuff);
