@@ -1,35 +1,23 @@
 import { context } from ".";
 import { Canvas } from "./Canvas";
-import { Colors } from "./Colors";
 import { Controller } from "./Controller";
-import { Player } from "./Player";
-
-export interface ISize {
-    width: number,
-    height: number
-}
-
-export interface IElement extends ISize{
-    posX: number,
-    posY: number,
-    color: Colors
-}
-
-export interface ISurface extends IElement {}
+import { IElement } from "./elements/Element";
+import { Player } from "./elements/Player";
 
 export class Scenario {
-    private surfaces: ISurface[] = [];
+    private surfaces: IElement[] = [];
 
-    public addSurface(surface: ISurface): void {
+    public addSurface(surface: IElement): void {
         this.surfaces.push(surface);
     }
     
-    public addSurfaces(surfaces: ISurface[]): void {
+    public addSurfaces(surfaces: IElement[]): void {
         surfaces.forEach(surface => this.addSurface(surface));
     }
 
     public drawScenario(): void {
         this.surfaces.forEach(surface => {
+            // TBD - find out how to reuse the draw implementation from Element
             context.fillStyle = surface.color;
             context.fillRect(surface.posX, surface.posY, surface.width, surface.height);
         
@@ -45,3 +33,5 @@ export class Scenario {
         context.clearRect(0, 0, Canvas.WIDTH, Canvas.HEIGHT);
     }
 }
+
+export { IElement };

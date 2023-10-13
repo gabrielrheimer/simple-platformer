@@ -1,5 +1,5 @@
 import { Canvas } from "../Canvas";
-import { Colors } from "../Colors";
+import { Colors } from "../Color";
 import { Scenario } from "../Scenario";
 
 export function drawScenario(): void {
