@@ -3,8 +3,8 @@ import { Element, IElement } from "./Element";
 
 export interface IMovableElement extends IElement {
     maximumSpeed: number,
-    speedY: number,
     speedX: number,
+    speedY: number,
     accelerationX: number,
     accelerationY: number,
 }
@@ -17,13 +17,23 @@ export class MovableElement extends Element {
         posY: number,
         color: Colors,
         public maximumSpeed: number,
-        public speedY: number,
-        public speedX: number,
         public accelerationX: number,
         public accelerationY: number
-    ) {
-        super(height, width, posX, posY, color);
-    }
+        ) {
+            super(height, width, posX, posY, color);
+        }
+        
+    public friction: number = 0.8;
+    public speedX: number = 0;
+    public speedY: number = 0;
+
+    // private previousFrame: IMovableElement = undefined;
+    // private currentFrame: IMovableElement = this.getElement();
+
+    // public refreshFrameReference(): void {
+    //     this.previousFrame = this.currentFrame;
+    //     this.previousFrame = this.getElement();
+    // }
 
     public getElement(): IMovableElement {
         return {
@@ -41,12 +51,17 @@ export class MovableElement extends Element {
     }
     
     public moveRight(): void {
-        this.posX += this.speedX;
-        if (this.speedX < this.maximumSpeed) this.speedX += this.accelerationX;
+        this.speedX = this.speedX + this.accelerationX;
+        this.speedX = this.speedX > this.maximumSpeed ? this.maximumSpeed : this.speedX;
     }
 
     public moveLeft(): void {
-        this.posX -= this.speedX;
-        if (this.speedX < this.maximumSpeed) this.speedX += this.accelerationX;
+        this.speedX = this.speedX - this.accelerationX;
+        this.speedX = this.speedX < -this.maximumSpeed ? -this.maximumSpeed : this.speedX;
+    }
+
+    public fillPosition(): void {
+        this.posX += this.speedX;
+        this.speedX *= this.friction;
     }
 }

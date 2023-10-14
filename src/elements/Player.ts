@@ -13,8 +13,6 @@ export class Player extends MovableElement {
             Player.DEFAULT_POSITION.posY,
             Player.COLOR,
             Player.MAXIMUM_SPEED,
-            Player.DEFAULT_SPEED,
-            Player.DEFAULT_SPEED,
             Player.DEFAULT_ACCELERATION,
             Player.DEFAULT_ACCELERATION
         );
@@ -25,9 +23,9 @@ export class Player extends MovableElement {
     public static HEIGHT = 25;
     public static DEFAULT_POSITION = { posX: 200, posY: 200 };
     public static COLOR = Colors.CHARACTER_GREEN; 
-    public static DEFAULT_SPEED = 1;
+    public static DEFAULT_SPEED = 0;
     public static MAXIMUM_SPEED = 5;
-    public static DEFAULT_ACCELERATION = 0.4;  
+    public static DEFAULT_ACCELERATION = 1;  
     
     /** @returns Singleton instance of Player */
     public static getInstance(): Player {

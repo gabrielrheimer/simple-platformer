@@ -43,9 +43,12 @@ function doStuff() {
         Player.getInstance().moveLeft();
     }
 
+    Player.getInstance().fillPosition();
+
     Scenario.clear();
     Player.getInstance().drawElement();
     Map1.drawScenario();
 
+    // Player.getInstance().refreshFrameReference();
     requestAnimationFrame(doStuff);
 }
