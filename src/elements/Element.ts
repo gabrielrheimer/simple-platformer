@@ -13,15 +13,15 @@ export interface IElement extends ISize {
 }
 
 export class Element {
-    constructor(public height: number, public width: number, public posX: number, public posY: number, public color: Colors) {
+    constructor(public posX: number, public posY: number, public width: number, public height: number, public color: Colors) {
     }
 
     public getElement(): IElement {
         return {
-            height: this.height,
-            width: this.width,
             posX: this.posX,
             posY: this.posY,
+            width: this.width,
+            height: this.height,
             color: this.color
         };
     }

@@ -1,40 +1,17 @@
 import { Canvas } from "../Canvas";
 import { Colors } from "../Color";
+import { Element } from "../elements/Element";
 import { Scenario } from "../Scenario";
+
+const surfaces: Element[] = [
+    new Element(0, 0, Canvas.WIDTH, 10, Colors.SURFACE_BROWN), // Top border
+    new Element(0, Canvas.HEIGHT - 10, Canvas.WIDTH, 10, Colors.SURFACE_BROWN), // Bottom border
+    new Element(0, 0, 10, Canvas.HEIGHT, Colors.SURFACE_BROWN), // Left border
+    new Element(Canvas.WIDTH - 10, 0, 10, Canvas.HEIGHT, Colors.SURFACE_BROWN), // Right border
+];
 
 export function drawScenario(): void {
     const map1 = new Scenario();
-
-    map1.addSurfaces([
-        { // Top border
-            posX: 0,
-            posY: 0,
-            width: Canvas.WIDTH,
-            height: 10,
-            color: Colors.SURFACE_BROWN
-        },
-        { // Bottom border
-            posX: 0,
-            posY: Canvas.HEIGHT - 10,
-            width: Canvas.WIDTH,
-            height: 10,
-            color: Colors.SURFACE_BROWN
-        },
-        { // Left border
-            posX: 0,
-            posY: 0,
-            width: 10,
-            height: Canvas.HEIGHT,
-            color: Colors.SURFACE_BROWN
-        },
-        { // Right border
-            posX: Canvas.WIDTH - 10,
-            posY: 0,
-            width: 10,
-            height: Canvas.HEIGHT,
-            color: Colors.SURFACE_BROWN
-        }
-    ]);
-
+    map1.addSurfaces(surfaces);
     map1.drawScenario();
 }

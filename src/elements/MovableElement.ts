@@ -11,19 +11,19 @@ export interface IMovableElement extends IElement {
 
 export class MovableElement extends Element {
     constructor(
-        height: number,
-        width: number,
         posX: number,
         posY: number,
+        width: number,
+        height: number,
         color: Colors,
         public maximumSpeed: number,
         public accelerationX: number,
         public accelerationY: number
         ) {
-            super(height, width, posX, posY, color);
+            super(posX, posY, width, height, color);
         }
         
-    public friction: number = 0.8;
+    public friction: number = 0.9;
     public speedX: number = 0;
     public speedY: number = 0;
 
@@ -47,7 +47,7 @@ export class MovableElement extends Element {
     }
 
     public resolveCollision(): void {
-        //
+        this.color = Colors.SURFACE_BROWN;
     }
     
     public moveRight(): void {
