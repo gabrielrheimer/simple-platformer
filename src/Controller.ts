@@ -33,10 +33,10 @@ export class Controller {
         const vectorX = A.relativeX - B.relativeX;
         const vectorY = A.relativeY - B.relativeY;
 
-        const halfWidth = A.width + B.width;
-        const halfHeight = A.height + B.height;
+        const halfWidths = A.width / 2 + B.width / 2;
+        const halfHeights = A.height / 2 + B.height / 2;
         
-        const collisionDetected = Math.abs(vectorX) < halfWidth && Math.abs(vectorY) < halfHeight;
+        const collisionDetected = Math.abs(vectorX) < halfWidths && Math.abs(vectorY) < halfHeights;
 
         return collisionDetected;
     }
