@@ -1,35 +1,27 @@
 import { context } from ".";
 import { Canvas } from "./Canvas";
 import { Controller } from "./Controller";
-import { Element, IElement } from "./elements/Element";
+import { Element } from "./elements/Element";
 import { Player } from "./elements/Player";
 
 export class Scenario {
     private surfaces: Element[] = [];
 
-    public addSurface(surface: IElement): void {
-        const surfaceElement = new Element(
-            surface.height,
-            surface.width,
-            surface.posX,
-            surface.posY,
-            surface.color
-        );
-        this.surfaces.push(surfaceElement);
+    public addSurface(surface: Element): void {
+        this.surfaces.push(surface);
     }
     
-    public addSurfaces(surfaces: IElement[]): void {
+    public addSurfaces(surfaces: Element[]): void {
         surfaces.forEach(surface => this.addSurface(surface));
     }
 
     public drawScenario(): void {
         this.surfaces.forEach(surface => {
-            // TBD - find out how to reuse the draw implementation from Element
             surface.drawElement();
-            const player = Player.getInstance();
-            const collisionDetected = Controller.collisionDetector(player.getElement(), surface);
+
+            const collisionDetected = Controller.collisionDetector(Player.getInstance().getElement(), surface);
             if (collisionDetected) {
-                player.resolveCollision();
+                Player.getInstance().resolveCollision();
             }
         });
     }
