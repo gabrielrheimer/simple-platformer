@@ -18,11 +18,7 @@ export class Scenario {
     public drawScenario(): void {
         this.surfaces.forEach(surface => {
             surface.drawElement();
-
-            const collisionDetected = Controller.collisionDetector(Player.getInstance().getElement(), surface);
-            if (collisionDetected) {
-                Player.getInstance().resolveCollision();
-            }
+            Controller.detectCollision(Player.getInstance(), surface);
         });
     }
 
