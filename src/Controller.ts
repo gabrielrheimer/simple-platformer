@@ -1,4 +1,5 @@
 import { Element } from "./elements/Element"
+import { MovableElement } from "./elements/MovableElement"
 
 export enum CollisionDirection {
     TOP = "top",
@@ -9,7 +10,7 @@ export enum CollisionDirection {
 }
 
 export class Controller {
-    public static detectCollision(elementA: Element, elementB: Element): CollisionDirection | undefined {
+    public static detectCollision(elementA: MovableElement, elementB: Element): CollisionDirection | undefined {
         /*  Remember that (x,y) represents the bottom-leftmost pixel of an element
 
             Steps to detect collision (this logic only works for rectangular objects):
@@ -43,7 +44,7 @@ export class Controller {
         }
     }
 
-    private static determineCollisionDirection(elementA: Element, elementB: Element, vectorX: number, vectorY: number): CollisionDirection {
+    private static determineCollisionDirection(elementA: MovableElement, elementB: Element, vectorX: number, vectorY: number): CollisionDirection {
         const halfWidths = elementA.width / 2 + elementB.width / 2;
         const halfHeights = elementA.height / 2 + elementB.height / 2;
         const halvesMinusVectorX = halfWidths - Math.abs(vectorX);
@@ -51,19 +52,23 @@ export class Controller {
 
         if (halvesMinusVectorX >= halvesMinusVectorY) {
             if (vectorY > 0) {
+                elementA.speedY = 0;
+                elementA.posY += halvesMinusVectorY;
                 return CollisionDirection.TOP;
-                // shapeA.y += oY;
             } else {
+                elementA.speedY = 0;
+                elementA.posY -= halvesMinusVectorY;
                 return CollisionDirection.BOTTOM;
-                // shapeA.y -= oY;
             }
         } else {
             if (vectorX > 0) {
+                elementA.speedX = 0;
+                elementA.posX += halvesMinusVectorX;
                 return CollisionDirection.LEFT;
-                // shapeA.x += oX;
             } else {
+                elementA.speedX = 0;
+                elementA.posX -= halvesMinusVectorX;
                 return CollisionDirection.RIGHT;
-                // shapeA.x -= oX;
             }
         }
     }
